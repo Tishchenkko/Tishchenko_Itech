@@ -1,0 +1,45 @@
+/* Inline style */
+.inline-style {
+    color: blue;
+}
+
+/* Style in <style> container in the head */
+#styled-in-head {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* External CSS file */
+.external-style {
+    background-color: #ffd700;
+    padding: 10px;
+    border: 2px solid #333;
+}
+
+/* Positioning */
+.positioned-element {
+    position: relative;
+    left: 50px;
+    top: 20px;
+}
+
+/* Floating elements */
+.floating-element {
+    float: left;
+    margin-right: 20px;
+}
+
+/* Flexbox container */
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-item {
+    width: 100px;
+    height: 100px;
+    background-color: #66cc66;
+    margin: 10px;
+}

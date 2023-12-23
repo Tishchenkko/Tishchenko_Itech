@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Table Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #interval {
+            width: 150px; /* Змінивши ширину поля для введення інтервалу */
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Змінивши відступ кнопок */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: 20px;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        th {
+            background-color: darkgray;
+            color: white;
+        }
+
+        .even {
+            background-color: #f2f2f2;
+            color: black;
+        }
+
+        .odd {
+            background-color: #333;
+            color: white;
+        }
+
+        .first-row {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: red; 
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label for="interval">Interval (seconds): </label>
+        <input type="number" id="interval" min="1" placeholder="Enter interval">
+        <button onclick="startGenerating()">Start Generating</button>
+        <button onclick="stopGenerating()">Stop Generating</button>
+    </div>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        let intervalId;
+
+        function startGenerating() {
+            const interval = document.getElementById('interval').value;
+            if (!interval || interval <= 0) {
+                alert("Please enter a valid interval");
+                return;
+            }
+
+            clearInterval(intervalId);
+            intervalId = setInterval(generateRow, interval * 1000);
+        }
+
+        function stopGenerating() {
+            clearInterval(intervalId);
+        }
+
+        function generateRow() {
+            const tableBody = $('#dataTable tbody');
+            const newRow = $('<tr>');
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+            newRow.html(`<td>${randomNumber}</td>`);
+
+            if (tableBody.children().length % 2 === 0) {
+                newRow.addClass('even');
+            } else {
+                newRow.addClass('odd');
+            }
+
+            if (tableBody.children().length === 0) {
+                newRow.addClass('first-row');
+            }
+
+            tableBody.append(newRow);
+        }
+    </script>
+</body>
+</html>
